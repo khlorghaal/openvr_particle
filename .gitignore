@@ -1,0 +1,10 @@
+*.exe
+*.o
+Release/src
+Debug/src
+/Debug/
+/x64/Debug/
+/.vs/
+*.db
+*.opendb
+*.cd
