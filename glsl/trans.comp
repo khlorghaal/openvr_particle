@@ -1,0 +1,68 @@
+uniform layout(location=0) double time;
+uniform layout(location=1) float dtime;
+
+uniform layout(location=2) vec4 cont0;//position, magnitude
+uniform layout(location=3) vec4 cont1;
+
+struct particle{
+	vec3 p;
+	vec3 v;
+	uint rgba;
+	float size;
+};
+layout(std430, binding=0) buffer particle_ssbo{
+	particle particles[];
+};
+layout(local_size_x=1) in;
+
+
+
+float rand(float x){
+	return fract(87113.1241*sin( 7.1*x ));
+}
+vec2 rand2(float x){
+	return fract(87113.1241*sin( 7.1*vec2(x,x+.5) ));
+}
+vec3 rand3(float x){
+	return fract(87113.1241*sin( 7.1*vec3(x,x+.33,x+.66) ));
+}
+
+
+vec3 attract(vec3 location, float mag, vec3 p){
+	p-= location;
+	float l= max(.001, length(p));
+	vec3 n= normalize(p);
+	return mag/(l)*-n;
+}
+
+
+void main(){
+	uint idx= gl_GlobalInvocationID.x;
+	particle part= particles[idx];
+	
+
+	vec3 a;
+	a+= attract(cont0.xyz, cont0.w, part.p);
+	a+= attract(cont1.xyz, cont1.w, part.p);
+
+	part.v+= a*dtime*dtime;
+
+	 part.v*= .999;//drag
+
+	part.p+= part.v*dtime;
+
+	float BOUND= 10.0;
+	float lpp= length(part.p);
+	if(lpp>BOUND){
+		vec3 normp= normalize(part.p);
+		vec3 normv= normalize(part.v);
+
+		float restitution= .75;
+		part.v+= -(1+restitution)*part.v*dot(normv,normp);
+
+		//part.p= normp*BOUND;
+	}
+	
+	particles[idx].p= part.p;
+	particles[idx].v= part.v;
+}

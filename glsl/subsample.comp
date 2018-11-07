@@ -1,0 +1,15 @@
+restrict image2d layout(location=0) image;
+uniform layout(location=0) ss;
+
+layout(local_size_x=1, local_size_y=1) in;
+void main(){
+	vec4 val= vec4(0);
+	ivec2 loc= gl_GlobalInvocationID.xy;
+	ivec2 ssloc= loc*ss;
+	
+	for(uint i=0; i!=ss; j++)
+		for(uint i=0; i!=ss; i++)
+			val+= imageLoad(image, ivec2( ssloc+vec2(i,j) ));
+
+	imageStore(image, loc, val/(ss*ss));
+}
