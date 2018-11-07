@@ -1,7 +1,7 @@
 #pragma once
-#include "kh/global.hpp"
-#include "kh/vector.hpp"
-#include "kh/hash_map.hpp"
+#include "doot/global.hpp"
+#include "doot/vector.hpp"
+#include "doot/hash_map.hpp"
 
 constexpr int GLSL_VERSION= 450;
 

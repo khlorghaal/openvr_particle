@@ -16,6 +16,18 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="vrbase.VC.db" />
+    <None Include=".gitignore" />
+    <None Include="README.md" />
+    <None Include="lib\glfw3.dll" />
+    <None Include="lib\glfw3.ilk" />
+    <None Include="lib\glfw3.pdb" />
+    <None Include="lib\glfw3dll.exp" />
+    <None Include="glsl\part.vert" />
+    <None Include="glsl\part.frag" />
+    <None Include="glsl\trans.comp" />
+    <None Include="lib\openvr_api.dll" />
+    <None Include="glsl\subsample.comp" />
+    <None Include="lib\openvr_api.pdb" />
     <None Include="include\glm\detail\func_common.inl">
       <Filter>Header Files</Filter>
     </None>
@@ -343,25 +355,8 @@
     <None Include="include\glm\gtx\wrap.inl">
       <Filter>Header Files</Filter>
     </None>
-    <None Include=".gitignore" />
-    <None Include="README.md" />
-    <None Include="lib\glfw3.dll" />
-    <None Include="lib\glfw3.ilk" />
-    <None Include="lib\glfw3.pdb" />
-    <None Include="lib\glfw3dll.exp" />
-    <None Include="glsl\part.vert" />
-    <None Include="glsl\part.frag" />
-    <None Include="glsl\trans.comp" />
-    <None Include="lib\openvr_api.dll" />
-    <None Include="glsl\subsample.comp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="src\gl3w.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="src\glcorearb.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="include\glm\detail\_features.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -788,88 +783,97 @@
     <ClInclude Include="include\glm\vector_relational.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="include\kh\bytebuf.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="include\kh\execq.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="include\kh\file.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="include\kh\global.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="include\kh\hash_map.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="include\kh\linear_heap.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="include\kh\mapped_heap.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="include\kh\ringbuffer.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="include\kh\string.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="include\kh\trans2d.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="include\kh\vec2.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="include\kh\vector.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="include\glfw3.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="include\openvr.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="src\doot\arr.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\doot\array_algos.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\doot\bitpacker.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\doot\buffer.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\doot\bytebuf.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\doot\execq.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\doot\file.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\doot\global.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\doot\hash.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\doot\hash_map.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\doot\index_recycler.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\doot\linear_heap.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\doot\lut.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\doot\mapped_heap.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\doot\math.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\doot\primitives.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\doot\ringbuffer.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\doot\slot.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\doot\string.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\doot\tasker.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\doot\thread.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\doot\timer.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\doot\trans2d.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\doot\transcendental.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\doot\vec2.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\doot\vector.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\gl3w.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\glcorearb.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
     <ClInclude Include="src\glprog.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="src\kh\bytebuf.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="src\kh\execq.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="src\kh\file.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="src\kh\global.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="src\kh\hash_map.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="src\kh\linear_heap.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="src\kh\mapped_heap.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="src\kh\ringbuffer.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="src\kh\string.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="src\kh\trans2d.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="src\kh\vec2.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="src\kh\vector.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="src\timer.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -878,37 +882,43 @@
     <Library Include="lib\openvr_api.lib" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="src\glprog.cpp">
+    <ClCompile Include="src\doot\bytebuf.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\Main.cpp">
+    <ClCompile Include="src\doot\console.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\kh\bytebuf.cpp">
+    <ClCompile Include="src\doot\file.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\kh\console.cpp">
+    <ClCompile Include="src\doot\gvars.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\kh\execq.cpp">
+    <ClCompile Include="src\doot\OS_win.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\kh\file.cpp">
+    <ClCompile Include="src\doot\string.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\kh\string.cpp">
+    <ClCompile Include="src\doot\tests.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\kh\trans2d.cpp">
+    <ClCompile Include="src\doot\timer.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\doot\trans2d.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\doot\weave.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="src\gl3w.c">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\entry.cpp">
+    <ClCompile Include="src\glprog.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\timer.cpp">
+    <ClCompile Include="src\Main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

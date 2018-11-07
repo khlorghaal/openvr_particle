@@ -5,7 +5,6 @@
  *	All Rights Reserved
  *	Do not distribute.
  */
-
 #pragma once
 
 #include "vector.hpp"

@@ -1,6 +1,8 @@
 #include "glprog.hpp"
 #include "gl3w.h"
-#include "kh/file.h"
+#include "doot/file.h"
+#include "doot/global.hpp"
+#include <stdlib.h>
 
 void glgetpiv(int iv, int ptr){
 	GLint lt;

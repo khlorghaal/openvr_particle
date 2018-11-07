@@ -8,18 +8,19 @@ struct linear_heap{
 	vector<T> heap;
 	vector<size_t> freed;
 	
-	size_t alloc(){
-		if(!freed.empty())
-			return heap[--freed.stop];
+	T* alloc(){
+		if(freed.empty())
+			return heap.alloc();
 		else
-			return heap++;
+			return heap+(--freed.stop);
 	}
 	void free(size_t i){
-		freed<<i;
 		#ifdef DEBUG
-		assert(i>=heap.base && p<heap.stop);//can't check against out of segment pointers
-		memset(p,0,SIZEOFT);
+		assert(i>=0 && i<heap.size());
+		memset(heap.base+i,0xFE,SIZEOFT);
 		#endif
+
+		freed<<i;
 	}
 	T& operator[](size_t i){
 		assert(i>=0 && i<heap.size());

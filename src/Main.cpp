@@ -1,13 +1,10 @@
-#include "kh/global.hpp"
+#include "doot/global.hpp"
 #include "gl3w.h"
 #include <glfw3.h>
 #include <openvr.h>
 
 #include "glprog.hpp"
-#include "timer.hpp"
-#include <iostream>
-using std::cout;
-
+#include "doot/timer.hpp"
 
 volatile bool running= true;
 Timer screentimer(100);
@@ -161,38 +158,39 @@ GLuint vr_fbo;
 vr::Texture_t* compostex;
 void initvr(){
 	bool hmd= vr::VR_IsHmdPresent();
+
+	vrOn= hmd;
+	if(!vrOn)
+		return;
+
 	bool rti= vr::VR_IsRuntimeInstalled();
 	vr::EVRInitError initerr;
 	vrsys= vr::VR_Init(&initerr, vr::EVRApplicationType::VRApplication_Scene);
 	if(initerr){
 		auto msg= vr::VR_GetVRInitErrorAsEnglishDescription(initerr);
 		vr::VR_Shutdown();
-		error(msg);
+		cnsl<<msg<<endl;
 		return;
 	}
 
 	compositor= vr::VRCompositor();
+	
+	vrsys->SetDisplayVisibility(false);
 
-	vrOn= hmd;
+	vrsys->GetRecommendedRenderTargetSize(&vr_w,&vr_h);
 
-	if(vrOn){
-		vrsys->SetDisplayVisibility(false);
+	glGenTextures(1,&vr_tex);
+	glBindTexture(GL_TEXTURE_2D, vr_tex);
+	glTexStorage2D(GL_TEXTURE_2D, 1, GL_RGBA8, vr_w*2, vr_h);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
 
-		vrsys->GetRecommendedRenderTargetSize(&vr_w,&vr_h);
-
-		glGenTextures(1,&vr_tex);
-		glBindTexture(GL_TEXTURE_2D, vr_tex);
-		glTexStorage2D(GL_TEXTURE_2D, 1, GL_RGBA8, vr_w*2, vr_h);
-		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
-		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
-		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
-
-		glGenFramebuffers(1,&vr_fbo);
-		glBindFramebuffer(GL_FRAMEBUFFER, vr_fbo);
-		glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, vr_tex, 0);
-		glBindFramebuffer(GL_FRAMEBUFFER, 0);
-	}
+	glGenFramebuffers(1,&vr_fbo);
+	glBindFramebuffer(GL_FRAMEBUFFER, vr_fbo);
+	glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, vr_tex, 0);
+	glBindFramebuffer(GL_FRAMEBUFFER, 0);
 }
 void termvr(){
 	return;
@@ -310,7 +308,7 @@ int64 lasttime= 0;
 int64 curtime= 0;
 void render(){
 	lasttime= curtime;
-	curtime= current_time_microsec();
+	curtime= current_time_us();
 	float dtime= (curtime-lasttime)/1e6f;
 	if(dtime>.1)//paused or blocked
 		dtime= 0;//don't explode

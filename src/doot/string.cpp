@@ -1,25 +1,54 @@
 #include "string.hpp"
 #include <stdlib.h>
+#include <stdarg.h>
 #include <string.h>
+#include <string>
+#include "math.hpp"
+namespace doot{
 
-string::string(){
-	cstr= (char*)malloc(1);
-	cstr[0]= 0;
-	len= 0;
+constexpr int STRFMTMAX= 1024;
+
+void strinit(string& s, int len_){
+	s.cstr= (char*)malloc(len_+1);
+	s.cstr[len_]= 0;
+	s.len= len_;
 }
-string::string(char const* c){
+string::string(){ strinit(*this, 0); }
+string::string(char const*const c){
 	len= strlen(c);
+	if(len==-1)
+		throw;
 	cstr= (char*)malloc(len+1);
 	memcpy(cstr, c, len+1);
 }
 string::string(string const& c): string(c.cstr){}
+
+
+string::string(long long v){
+	strinit(*this, STRFMTMAX);
+	snprintf(cstr, STRFMTMAX, "%8lli", v);
+};
+string::string(double v){
+	strinit(*this, STRFMTMAX);
+	snprintf(cstr, STRFMTMAX, "%4.4f", v);
+
+};
+string strfmt(char const* fmt, ...){
+	string ret;
+	strinit(ret, STRFMTMAX);
+	va_list vargs;
+	va_start(vargs, fmt);
+	vsnprintf(ret.cstr, STRFMTMAX, fmt, vargs);
+	return ret;
+};
+
 string::~string(){
 	free(cstr);
 }
 
 
 void string::operator=(char const* c){
-	if(cstr)
+	if(strlen(cstr)==len)
 		free(cstr);
 	len= strlen(c);
 	cstr= (char*)malloc(len+1);
@@ -30,7 +59,7 @@ void string::operator=(string const& c){
 }
 
 
-string string::operator+(char const* that){
+string string::operator+(char const* that) const{
 	string ret;
 	size_t lthis= strlen(cstr);
 	size_t lthat= strlen(that);
@@ -42,7 +71,7 @@ string string::operator+(char const* that){
 
 	return ret;
 }
-string string::operator+(string const& s){
+string string::operator+(string const& s) const{
 	return operator+(s.cstr);
 }
 
@@ -55,7 +84,7 @@ string& string::operator<<(string const& s){
 	return operator<<(s.cstr);
 }
 
-bool string::operator==(string const& that){
+bool string::operator==(string const& that) const{
 	if(cstr==that.cstr)
 		return true;
 	if(len!=that.len)
@@ -79,4 +108,5 @@ unsigned int hash(char const* s){
 	while(c=*s++)
 		x= (x<<5)+x+c;
 	return x;
+}
 }
