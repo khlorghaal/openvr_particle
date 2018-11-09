@@ -1,4 +1,4 @@
-*.exe
+Debug/*.exe
 *.o
 log.txt
 */log.txt
