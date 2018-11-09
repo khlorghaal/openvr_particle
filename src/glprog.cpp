@@ -28,9 +28,15 @@ void glgetpiv(int iv, int ptr){
 string getShaderSrc(string snam){
 	string fnam;
 	fnam<<"glsl/"<<snam;
+
 	char* dat= file_dump(fnam.cstr);
 	if(!dat){
-		error("Cannot open shader src"<<snam);
+		fnam= "";
+		fnam<<"../glsl/"<<snam;
+		char* dat= file_dump(fnam.cstr);
+	}
+	if(!dat){
+		error("Cannot open shader src: "<<fnam);
 		throw;
 		free(dat);
 		return "";
@@ -38,7 +44,7 @@ string getShaderSrc(string snam){
 
 	string ret;
 	char verstr[8];
-	_itoa(GLSL_VERSION, verstr, 10);
+	_itoa_s(GLSL_VERSION, verstr, 10);
 	ret<<"#version "<<verstr<<"\n";
 	//TODO includes
 	ret<<"#line 1\n";

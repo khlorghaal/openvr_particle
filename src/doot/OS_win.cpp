@@ -29,8 +29,8 @@ int CALLBACK WinMain(
 	AllocConsole();//VS has no console
 	freopen("CONOUT$", "w", stdout);
 	freopen("CONOUT$", "w", stderr); 
-	#elif
-	#error
+	#else
+	//#error
 	freopen("log.txt", "w", stdout);
 	freopen("log.txt", "w", stderr);
 	#endif

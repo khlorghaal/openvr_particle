@@ -41,7 +41,7 @@ void initglfw(){
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 5);
 	#ifdef DEBUG
 	glfwWindowHint(GLFW_OPENGL_DEBUG_CONTEXT, true);
-	#elif
+	#else
 	glfwWindowHint(GLFW_OPENGL_DEBUG_CONTEXT, false);
 	#endif
 	glfwWindowHint(GLFW_DOUBLEBUFFER, true);
@@ -358,26 +358,25 @@ void render(){
 	partprog.bind();
 	glBindVertexArray(vao);
 
-	//no vr
-	if(!vrOn){
-		#undef far /*windows pls*/
-		float far= 1000;
-		float mvp[]= {
-			float(screen_h)/screen_w,0,0,0,
-			0,1,0,0,
-			0,0,1/far,0,
-			0,0,1,1.5
-		};
-		glBindFramebuffer(GL_FRAMEBUFFER, 0);
-		glViewport(0,0,screen_w,screen_h);
-		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+	//desktop
+	#undef far /*windows pls*/
+	float far= 1000;
+	float mvp[]= {
+		float(screen_h)/screen_w,0,0,0,
+		0,1,0,0,
+		0,0,1/far,0,
+		0,0,1,1.5
+	};
+	glBindFramebuffer(GL_FRAMEBUFFER, 0);
+	glViewport(0,0,screen_w,screen_h);
+	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-		glUniform2i(1, screen_w, screen_h);
-		glUniformMatrix4fv(0,1,true,mvp);
-		glDrawArrays(GL_POINTS,0,pointcount);
-	}
+	glUniform2i(1, screen_w, screen_h);
+	glUniformMatrix4fv(0,1,true,mvp);
+	glDrawArrays(GL_POINTS,0,pointcount);
+
 	//vr
-	else{
+	if(vrOn){
 		updatePoses();
 
 		glBindFramebuffer(GL_FRAMEBUFFER, vr_tex);

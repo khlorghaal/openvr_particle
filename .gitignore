@@ -1,9 +1,12 @@
 *.exe
 *.o
+log.txt
+*/log.txt
 Release/src
 Debug/src
 /Debug/
 /x64/Debug/
+*/temp/
 /.vs/
 *.db
 *.opendb
