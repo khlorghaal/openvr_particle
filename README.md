@@ -1,3 +1,1 @@
-Copyright John Sherrill
-
-All rights reserved
+GNU GPLv3
